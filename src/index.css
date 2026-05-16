@@ -1,0 +1,12 @@
+@import '../theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: var(--sds-typography-body-font-family), system-ui, sans-serif;
+  background-color: var(--sds-color-background-default-default);
+  color: var(--sds-color-text-default-default);
+}
