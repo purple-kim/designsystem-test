@@ -19,4 +19,17 @@ export {
   type CardGridIconProps,
   type CardGridItem,
 } from './CardGridIcon';
+export { HeroImage, heroVariants, type HeroImageProps } from './HeroImage';
+export {
+  PanelImageDouble,
+  panelVariants,
+  type PanelImageDoubleProps,
+  type PanelItem,
+} from './PanelImageDouble';
 export { PlaceholderIcon } from './icons/PlaceholderIcon';
+export { ZapIcon } from './icons/ZapIcon';
+export { PenToolIcon } from './icons/PenToolIcon';
+export { SaveIcon } from './icons/SaveIcon';
+export { LayersIcon } from './icons/LayersIcon';
+export { LoaderIcon } from './icons/LoaderIcon';
+export { UsersIcon } from './icons/UsersIcon';

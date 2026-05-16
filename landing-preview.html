@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EduPath — 랜딩페이지 프리뷰</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+/* ── SDS tokens (theme.css 그대로) ─────────────────────────────── */
+:root {
+  --sds-color-background-brand-default: #2c2c2c;
+  --sds-color-background-brand-hover: #1e1e1e;
+  --sds-color-background-brand-secondary: #e6e6e6;
+  --sds-color-background-default-default: #ffffff;
+  --sds-color-background-default-secondary: #f5f5f5;
+  --sds-color-background-default-tertiary: #d9d9d9;
+  --sds-color-background-disabled-default: #d9d9d9;
+  --sds-color-background-neutral-default: #5a5a5a;
+  --sds-color-background-neutral-hover: #434343;
+  --sds-color-border-brand-default: #2c2c2c;
+  --sds-color-border-default-default: #d9d9d9;
+  --sds-color-border-disabled-default: #b3b3b3;
+  --sds-color-text-brand-on-brand: #f5f5f5;
+  --sds-color-text-neutral-on-neutral: #f3f3f3;
+  --sds-color-text-default-default: #1e1e1e;
+  --sds-color-text-default-secondary: #757575;
+  --sds-color-text-default-tertiary: #b3b3b3;
+  --sds-color-text-disabled-default: #b3b3b3;
+  --sds-size-radius-100: 4px;
+  --sds-size-radius-200: 8px;
+  --sds-size-radius-400: 16px;
+  --sds-size-radius-full: 9999px;
+  --sds-size-space-100: 4px;
+  --sds-size-space-200: 8px;
+  --sds-size-space-300: 12px;
+  --sds-size-space-400: 16px;
+  --sds-size-space-600: 24px;
+  --sds-size-space-800: 32px;
+  --sds-size-space-1600: 64px;
+  --sds-size-space-2400: 96px;
+  --sds-size-space-4000: 160px;
+  --sds-typography-body-font-family: Inter;
+  --sds-typography-body-font-weight-regular: 400;
+  --sds-typography-body-font-weight-strong: 600;
+  --sds-typography-body-size-medium: 16px;
+  --sds-typography-body-size-small: 14px;
+  --sds-typography-heading-font-family: Inter;
+  --sds-typography-heading-font-weight: 600;
+  --sds-typography-heading-size-base: 24px;
+  --sds-typography-subheading-font-weight: 400;
+  --sds-typography-subheading-size-medium: 20px;
+  --sds-typography-subtitle-font-weight: 400;
+  --sds-typography-subtitle-size-base: 32px;
+  --sds-typography-title-hero-font-weight: 700;
+  --sds-typography-title-hero-size: 72px;
+  --sds-size-stroke-border: 1px;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--sds-typography-body-font-family), system-ui, sans-serif;
+  background: var(--sds-color-background-default-default);
+  color: var(--sds-color-text-default-default);
+  font-size: var(--sds-typography-body-size-medium);
+  line-height: 1.5;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ── Button ────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--sds-size-space-200);
+  border-radius: var(--sds-size-radius-200);
+  border: 1px solid transparent;
+  font-family: inherit; font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-regular);
+  cursor: pointer; transition: background .15s;
+  min-height: 40px; min-width: 75px;
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
+  white-space: nowrap;
+}
+.btn.sm { min-height: 32px; min-width: 67px; padding: var(--sds-size-space-100) var(--sds-size-space-300); font-size: var(--sds-typography-body-size-small); }
+.btn.primary { background: var(--sds-color-background-brand-default); color: var(--sds-color-text-brand-on-brand); }
+.btn.primary:hover { background: var(--sds-color-background-brand-hover); }
+.btn.neutral { background: var(--sds-color-background-neutral-default); color: var(--sds-color-text-neutral-on-neutral); }
+.btn.neutral:hover { background: var(--sds-color-background-neutral-hover); }
+.btn.subtle {
+  background: var(--sds-color-background-default-secondary);
+  color: var(--sds-color-text-default-default);
+  border-color: var(--sds-color-border-default-default);
+}
+
+/* ── Layout helpers ────────────────────────────────────────────── */
+.inner { max-width: 1200px; margin: 0 auto; padding: 0 var(--sds-size-space-400); }
+
+/* ══════════════════════════════════════════════════════════════════
+   HEADER  (Figma: Header, Platform=Desktop, State=Default)
+══════════════════════════════════════════════════════════════════ */
+.site-header {
+  width: 100%;
+  border-bottom: 1px solid var(--sds-color-border-default-default);
+  background: var(--sds-color-background-default-default);
+  position: sticky; top: 0; z-index: 10;
+}
+.site-header .inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 99px; gap: var(--sds-size-space-600);
+}
+.logo {
+  font-family: var(--sds-typography-heading-font-family);
+  font-weight: var(--sds-typography-heading-font-weight);
+  font-size: var(--sds-typography-heading-size-base);
+  color: var(--sds-color-text-default-default);
+  flex-shrink: 0;
+}
+.site-nav {
+  display: flex; align-items: center;
+  gap: var(--sds-size-space-600);
+  font-size: var(--sds-typography-body-size-medium);
+  color: var(--sds-color-text-default-secondary);
+  flex: 1; justify-content: flex-end;
+}
+.site-nav a:hover { color: var(--sds-color-text-default-default); transition: color .15s; }
+
+/* ══════════════════════════════════════════════════════════════════
+   HERO IMAGE  (Figma: Hero Image, Platform=Desktop)
+══════════════════════════════════════════════════════════════════ */
+.hero {
+  width: 100%;
+  background: var(--sds-color-background-default-default);
+  border-bottom: 1px solid var(--sds-color-border-default-default);
+  padding: var(--sds-size-space-4000) 0;
+}
+.hero .inner {
+  display: flex; flex-direction: column;
+  align-items: center; gap: var(--sds-size-space-800);
+}
+/* Text Content Title (Figma: Align=Center) */
+.hero-text {
+  display: flex; flex-direction: column;
+  align-items: center; gap: var(--sds-size-space-400);
+  text-align: center; max-width: 720px;
+}
+.hero-title {
+  font-family: var(--sds-typography-heading-font-family);
+  font-weight: var(--sds-typography-title-hero-font-weight);
+  font-size: var(--sds-typography-title-hero-size);
+  color: var(--sds-color-text-default-default);
+  line-height: 1.15;
+}
+.hero-subtitle {
+  font-family: var(--sds-typography-body-font-family);
+  font-weight: var(--sds-typography-subtitle-font-weight);
+  font-size: var(--sds-typography-subtitle-size-base);
+  color: var(--sds-color-text-default-secondary);
+  line-height: 1.3;
+}
+/* Button Group (Figma: Align=Center) */
+.hero-actions {
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  gap: var(--sds-size-space-300);
+}
+/* Image placeholder */
+.hero-image {
+  width: 100%; height: 480px;
+  border-radius: var(--sds-size-radius-400);
+  background: var(--sds-color-background-default-secondary);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sds-color-text-default-tertiary);
+  font-size: var(--sds-typography-body-size-small);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   PANEL IMAGE DOUBLE  (Figma: Panel Image Double, Platform=Desktop)
+══════════════════════════════════════════════════════════════════ */
+.panel-section {
+  width: 100%;
+  background: var(--sds-color-background-default-secondary);
+  border-bottom: 1px solid var(--sds-color-border-default-default);
+  padding: var(--sds-size-space-1600) 0;
+}
+.panel-section .inner {
+  display: flex; flex-direction: column;
+  gap: var(--sds-size-space-800);
+}
+/* Text Content Heading (Figma: Align=Start) */
+.panel-heading { display: flex; flex-direction: column; gap: var(--sds-size-space-200); }
+.section-heading {
+  font-family: var(--sds-typography-heading-font-family);
+  font-weight: var(--sds-typography-heading-font-weight);
+  font-size: var(--sds-typography-heading-size-base);
+  color: var(--sds-color-text-default-default);
+}
+.section-subheading {
+  font-family: var(--sds-typography-body-font-family);
+  font-weight: var(--sds-typography-subheading-font-weight);
+  font-size: var(--sds-typography-subheading-size-medium);
+  color: var(--sds-color-text-default-secondary);
+}
+.panel-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--sds-size-space-600);
+}
+.panel-card {
+  display: flex; flex-direction: column;
+  border-radius: var(--sds-size-radius-400);
+  border: 1px solid var(--sds-color-border-default-default);
+  background: var(--sds-color-background-default-default);
+  overflow: hidden;
+}
+.panel-img {
+  width: 100%; height: 240px;
+  background: var(--sds-color-background-default-tertiary);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sds-color-text-default-tertiary);
+  font-size: var(--sds-typography-body-size-small);
+}
+.panel-body {
+  display: flex; flex-direction: column;
+  gap: var(--sds-size-space-300);
+  padding: var(--sds-size-space-600);
+}
+.panel-title {
+  font-family: var(--sds-typography-heading-font-family);
+  font-weight: var(--sds-typography-heading-font-weight);
+  font-size: var(--sds-typography-heading-size-base);
+  color: var(--sds-color-text-default-default);
+}
+.panel-text {
+  font-size: var(--sds-typography-body-size-medium);
+  color: var(--sds-color-text-default-secondary);
+  line-height: 1.6;
+}
+.panel-actions {
+  display: flex; flex-wrap: wrap;
+  gap: var(--sds-size-space-200);
+  padding-top: var(--sds-size-space-100);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CARD GRID ICON  (Figma: Card Grid Icon, Platform=Desktop)
+══════════════════════════════════════════════════════════════════ */
+.card-section {
+  width: 100%;
+  background: var(--sds-color-background-default-default);
+  border-bottom: 1px solid var(--sds-color-border-default-default);
+  padding: var(--sds-size-space-1600) 0;
+}
+.card-section .inner {
+  display: flex; flex-direction: column;
+  gap: var(--sds-size-space-800);
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sds-size-space-400);
+}
+/* Figma: Card, Asset Type=Icon, Variant=Default, Direction=Horizontal */
+.card {
+  display: flex; flex-direction: column;
+  gap: var(--sds-size-space-300);
+  border-radius: var(--sds-size-radius-400);
+  border: 1px solid var(--sds-color-border-default-default);
+  background: var(--sds-color-background-default-default);
+  padding: var(--sds-size-space-400);
+}
+.card-icon-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: var(--sds-size-radius-200);
+  background: var(--sds-color-background-default-secondary);
+  color: var(--sds-color-text-default-default);
+  flex-shrink: 0;
+}
+.card-icon-wrap svg { width: 24px; height: 24px; }
+.card-title {
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-strong);
+  color: var(--sds-color-text-default-default);
+}
+.card-desc {
+  font-size: var(--sds-typography-body-size-small);
+  color: var(--sds-color-text-default-secondary);
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FOOTER  (Figma: Footer, Platform=Desktop)
+══════════════════════════════════════════════════════════════════ */
+.site-footer {
+  width: 100%;
+  background: var(--sds-color-background-default-secondary);
+  border-top: 1px solid var(--sds-color-border-default-default);
+  padding: var(--sds-size-space-800) 0;
+}
+.site-footer .inner { display: flex; flex-direction: column; gap: var(--sds-size-space-600); }
+.footer-cols {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--sds-size-space-600);
+}
+.footer-col { display: flex; flex-direction: column; gap: var(--sds-size-space-200); }
+.footer-col-title {
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-strong);
+  color: var(--sds-color-text-default-default);
+}
+.footer-col a {
+  font-size: var(--sds-typography-body-size-small);
+  color: var(--sds-color-text-default-secondary);
+  transition: color .15s;
+}
+.footer-col a:hover { color: var(--sds-color-text-default-default); }
+.footer-bottom {
+  border-top: 1px solid var(--sds-color-border-default-default);
+  padding-top: var(--sds-size-space-400);
+  font-size: var(--sds-typography-body-size-small);
+  color: var(--sds-color-text-default-secondary);
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="inner">
+    <span class="logo">EduPath</span>
+    <nav class="site-nav">
+      <a href="#curriculum">커리큘럼</a>
+      <a href="#instructor">강사진</a>
+      <a href="#community">커뮤니티</a>
+      <a href="#review">후기</a>
+      <a href="#pricing">요금제</a>
+      <a href="#contact">문의</a>
+      <button class="btn primary sm">무료체험 하기</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══ HERO IMAGE ═════════════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="inner">
+    <!-- Text Content Title (Align=Center) -->
+    <div class="hero-text">
+      <h1 class="hero-title">미래를 설계하는 교육</h1>
+      <p class="hero-subtitle">실무 중심 커리큘럼으로 성장하세요</p>
+    </div>
+    <!-- Button Group (Align=Center) -->
+    <div class="hero-actions">
+      <button class="btn neutral">커리큘럼 보기</button>
+      <button class="btn primary">수강신청</button>
+    </div>
+    <!-- Image placeholder -->
+    <div class="hero-image">이미지 영역 (placeholder)</div>
+  </div>
+</section>
+
+<!-- ══ PANEL IMAGE DOUBLE ═════════════════════════════════════════ -->
+<section class="panel-section" id="curriculum">
+  <div class="inner">
+    <!-- Text Content Heading (Align=Start) -->
+    <div class="panel-heading">
+      <h2 class="section-heading">커리큘럼 소개</h2>
+      <p class="section-subheading">당신의 목표에 맞는 과정을 선택하세요</p>
+    </div>
+    <div class="panel-grid">
+      <!-- Panel 1 -->
+      <article class="panel-card">
+        <div class="panel-img">이미지 영역 (placeholder)</div>
+        <div class="panel-body">
+          <h3 class="panel-title">프론트엔드 개발</h3>
+          <p class="panel-text">React, TypeScript, Next.js 등 최신 프론트엔드 기술 스택을 실습 중심으로 학습합니다. 포트폴리오 프로젝트를 통해 실무 역량을 갖춥니다.</p>
+          <div class="panel-actions">
+            <button class="btn subtle sm">커리큘럼 보기</button>
+            <button class="btn primary sm">수강신청</button>
+          </div>
+        </div>
+      </article>
+      <!-- Panel 2 -->
+      <article class="panel-card">
+        <div class="panel-img">이미지 영역 (placeholder)</div>
+        <div class="panel-body">
+          <h3 class="panel-title">UX/UI 디자인</h3>
+          <p class="panel-text">사용자 리서치부터 와이어프레임, 프로토타이핑까지 UX 디자인의 전 과정을 Figma와 함께 체계적으로 배웁니다.</p>
+          <div class="panel-actions">
+            <button class="btn subtle sm">커리큘럼 보기</button>
+            <button class="btn primary sm">수강신청</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CARD GRID ICON ═════════════════════════════════════════════ -->
+<section class="card-section" id="features">
+  <div class="inner">
+    <!-- Text Content Heading (Align=Start) -->
+    <div class="panel-heading">
+      <h2 class="section-heading">왜 EduPath인가요?</h2>
+      <p class="section-subheading">실무에서 바로 쓸 수 있는 역량을 키우는 6가지 이유</p>
+    </div>
+    <div class="card-grid">
+      <!-- Zap -->
+      <article class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <h3 class="card-title">빠른 실력 향상</h3>
+        <p class="card-desc">실무 프로젝트 중심의 커리큘럼으로 단기간에 현업 수준의 역량을 갖춥니다.</p>
+      </article>
+      <!-- Pen Tool -->
+      <article class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+            <path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/>
+          </svg>
+        </div>
+        <h3 class="card-title">실습 중심 학습</h3>
+        <p class="card-desc">강의만 듣는 수업이 아니라 매 세션마다 직접 만들며 배우는 핸즈온 방식입니다.</p>
+      </article>
+      <!-- Save -->
+      <article class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+            <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+          </svg>
+        </div>
+        <h3 class="card-title">학습 자료 제공</h3>
+        <p class="card-desc">수업 자료, 코드 예제, 참고 문서를 언제든지 다운로드하고 복습할 수 있습니다.</p>
+      </article>
+      <!-- Layers -->
+      <article class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+            <polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+          </svg>
+        </div>
+        <h3 class="card-title">체계적 커리큘럼</h3>
+        <p class="card-desc">입문부터 심화까지 단계별로 설계된 로드맵으로 빈틈없이 학습할 수 있습니다.</p>
+      </article>
+      <!-- Loader -->
+      <article class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+            <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+          </svg>
+        </div>
+        <h3 class="card-title">지속적 업데이트</h3>
+        <p class="card-desc">빠르게 변하는 기술 트렌드에 맞춰 커리큘럼과 자료를 주기적으로 갱신합니다.</p>
+      </article>
+      <!-- Users -->
+      <article class="card">
+        <div class="card-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3 class="card-title">활발한 커뮤니티</h3>
+        <p class="card-desc">같은 목표를 가진 동료들과 함께 성장하는 스터디 그룹과 네트워크를 제공합니다.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <p class="footer-col-title">교육 과정</p>
+        <a href="#">프론트엔드 개발</a>
+        <a href="#">UX/UI 디자인</a>
+        <a href="#">데이터 분석</a>
+        <a href="#">프로덕트 매니지먼트</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">회사</p>
+        <a href="#">소개</a>
+        <a href="#">채용</a>
+        <a href="#">블로그</a>
+        <a href="#">파트너십</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">지원</p>
+        <a href="#">FAQ</a>
+        <a href="#">문의하기</a>
+        <a href="#">환불 정책</a>
+        <a href="#">이용약관</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">팔로우</p>
+        <a href="#">인스타그램</a>
+        <a href="#">링크드인</a>
+        <a href="#">유튜브</a>
+        <a href="#">뉴스레터</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 EduPath. 모든 권리 보유.</div>
+  </div>
+</footer>
+
+</body>
+</html>
