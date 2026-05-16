@@ -10,9 +10,10 @@ import {
   InputField,
   PlaceholderIcon,
 } from './components';
+import { LandingPage } from './pages/LandingPage';
 
 // ─── Tab types ────────────────────────────────────────────────────
-type Tab = 'components' | 'colors' | 'typography' | 'spacing';
+type Tab = 'landing' | 'components' | 'colors' | 'typography' | 'spacing';
 
 // ─── Shared layout helpers ────────────────────────────────────────
 function SectionTitle({ children }: { children: ReactNode }) {
@@ -43,6 +44,7 @@ function DemoBlock({ title, children, fullWidth }: { title: string; children: Re
 // ─── Tab navigation ───────────────────────────────────────────────
 function TabBar({ active, onChange }: { active: Tab; onChange: (t: Tab) => void }) {
   const tabs: { id: Tab; label: string }[] = [
+    { id: 'landing', label: '🏠 Landing Page' },
     { id: 'components', label: 'Components' },
     { id: 'colors', label: 'Colors' },
     { id: 'typography', label: 'Typography' },
@@ -665,7 +667,7 @@ function SpacingTab() {
 // APP ROOT
 // ═══════════════════════════════════════════════════════════════════
 export default function App() {
-  const [tab, setTab] = useState<Tab>('components');
+  const [tab, setTab] = useState<Tab>('landing');
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -694,14 +696,18 @@ export default function App() {
       </div>
 
       {/* Content */}
-      <div className="mx-auto max-w-[1200px] px-400 py-800">
-        {tab === 'components' && (
-          <ComponentsTab mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
-        )}
-        {tab === 'colors' && <ColorsTab />}
-        {tab === 'typography' && <TypographyTab />}
-        {tab === 'spacing' && <SpacingTab />}
-      </div>
+      {tab === 'landing' ? (
+        <LandingPage />
+      ) : (
+        <div className="mx-auto max-w-[1200px] px-400 py-800">
+          {tab === 'components' && (
+            <ComponentsTab mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+          )}
+          {tab === 'colors' && <ColorsTab />}
+          {tab === 'typography' && <TypographyTab />}
+          {tab === 'spacing' && <SpacingTab />}
+        </div>
+      )}
     </div>
   );
 }
